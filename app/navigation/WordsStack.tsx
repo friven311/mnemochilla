@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WordListScreen from '../screens/Words/WordListScreen';
 import LearnScreen from '../screens/Home/LearnScreen'; // переиспользуем Learn
+import WordListScreen from '../screens/Words/WordListScreen';
 
 const Stack = createNativeStackNavigator();
 
