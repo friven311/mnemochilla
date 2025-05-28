@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="HomeMain" component={HomeScreen} />
+      <Stack.Screen name="HomeMain" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="RepeatWord" component={RepeatWordScreen} />
       <Stack.Screen name="Learn" component={LearnScreen} />
       <Stack.Screen name="LearnNext" component={LearnNextScreen} />
