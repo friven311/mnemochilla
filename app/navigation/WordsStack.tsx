@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator();
 
 const WordsStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="WordList" component={WordListScreen} />
       <Stack.Screen name="Learn" component={LearnScreen} />
     </Stack.Navigator>

@@ -1,10 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import RoundProgressBar from '../../components/RoundProgressBar';
+import TopProgressCard from '../../components/TopProgressCard';
+import WordCategoryCard from '../../components/WordCategoryCard';
+import { levelsData } from './data';
 
 const WordListScreen = () => (
-  <View style={styles.container}>
-    <Text>Word List Screen</Text>
-  </View>
+  <ScrollView style={styles.container}>
+    <TopProgressCard level="A1" progress={0.7} />
+    {Object.values(levelsData).map((level) => (
+      <View key={level.eng} style={{ marginBottom: 24 }}>
+        <View style={styles.levelRow}>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.levelTitle}>
+              {level.eng}, {level.name}
+            </Text>
+            <Text style={styles.levelRu}>{level.ru}</Text>
+          </View>
+          <RoundProgressBar percent={30} label="уровень" />
+        </View>
+        <FlatList
+          data={level.partsOfSpeech}
+          keyExtractor={(item) => item.key}
+          horizontal
+          renderItem={({ item }) => <WordCategoryCard title={item.ru} />}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+    ))}
+  </ScrollView>
 );
 
 export default WordListScreen;
@@ -12,7 +36,29 @@ export default WordListScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#F8F7FB',
+    paddingTop: 24,
+    paddingHorizontal: 16,
+  },
+  listContent: {
+    paddingTop: 16,
+    paddingBottom: 32,
+  },
+  levelRow: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: 8,
+  },
+  levelTitle: {
+    fontSize: 19,
+    color: '#D975BB',
+    fontWeight: '600',
+    marginBottom: 2,
+  },
+  levelRu: {
+    fontSize: 24,
+    color: '#000',
+    fontWeight: '700',
+    marginBottom: 8,
   },
 });
