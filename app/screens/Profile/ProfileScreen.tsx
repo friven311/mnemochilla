@@ -22,8 +22,10 @@ const ProfileScreen = () => (
     <Text style={styles.sectionTitle}>Помощь и настройки</Text>
     <ProfileMenuButton text="Техподдержка и помощь" />
     <ProfileMenuButton text="Политика конфиденциальности" />
-    <ProfileMenuButton text="Настройки" />
-    <ProfileMenuButton text="Выход" />
+    <View style={styles.menuRow}>
+      <ProfileMenuButton text="Настройки" />
+      <ProfileMenuButton text="Выход" />
+    </View>
   </ScrollView>
 );
 
@@ -49,5 +51,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 8,
+  },
+  menuRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 12,
+    marginTop: 8,
   },
 });

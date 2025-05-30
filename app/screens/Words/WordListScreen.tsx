@@ -1,35 +1,49 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import RoundProgressBar from '../../components/RoundProgressBar';
 import TopProgressCard from '../../components/TopProgressCard';
 import WordCategoryCard from '../../components/WordCategoryCard';
 import { levelsData } from './data';
 
-const WordListScreen = () => (
-  <ScrollView style={styles.container}>
-    <TopProgressCard level="A1" progress={0.7} />
-    {Object.values(levelsData).map((level) => (
-      <View key={level.eng} style={{ marginBottom: 24 }}>
-        <View style={styles.levelRow}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.levelTitle}>
-              {level.eng}, {level.name}
-            </Text>
-            <Text style={styles.levelRu}>{level.ru}</Text>
+const WordListScreen = () => {
+  const navigation = useNavigation<any>();
+  return (
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ paddingBottom: 100 }}
+    >
+      <TopProgressCard level="A1" progress={0.7} />
+      {Object.values(levelsData).map((level) => (
+        <View key={level.eng} style={{ marginBottom: 24 }}>
+          <View style={styles.levelRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.levelTitle}>
+                {level.eng}, {level.name}
+              </Text>
+              <Text style={styles.levelRu}>{level.ru}</Text>
+            </View>
+            <RoundProgressBar percent={30} label="уровень" />
           </View>
-          <RoundProgressBar percent={30} label="уровень" />
+          <FlatList
+            data={level.partsOfSpeech}
+            keyExtractor={(item) => item.key}
+            horizontal
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate('Learn', { partOfSpeech: item.key, level: level.eng })}
+              >
+                <WordCategoryCard title={item.ru} />
+              </TouchableOpacity>
+            )}
+            showsHorizontalScrollIndicator={false}
+          />
         </View>
-        <FlatList
-          data={level.partsOfSpeech}
-          keyExtractor={(item) => item.key}
-          horizontal
-          renderItem={({ item }) => <WordCategoryCard title={item.ru} />}
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
-    ))}
-  </ScrollView>
-);
+      ))}
+    </ScrollView>
+  );
+};
 
 export default WordListScreen;
 
