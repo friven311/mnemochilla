@@ -1,6 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import FlipCard from '../../components/FlipCard';
 
 const LearnScreen = () => {
   const navigation = useNavigation();
@@ -10,6 +11,7 @@ const LearnScreen = () => {
   const progress = 100;
   const total = 200;
   const word = 'Стакан';
+  const translation = 'СТАКАН С ГЛАЗАМИ';
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -21,23 +23,15 @@ const LearnScreen = () => {
           <View style={styles.headerTextBlock}>
             <Text style={styles.topTitle}>Изучение Слов</Text>
             <Text style={styles.levelTitle}>{level} <Text style={styles.levelCategory}>{category}</Text></Text>
+            <View style={styles.progressRow}>
+              <Text style={styles.progressText}>{progress}/{total}</Text>
+              <View style={styles.progressBarBg}>
+                <View style={[styles.progressBarFill, { width: `${(progress / total) * 100}%` }]} />
+              </View>
+            </View>
           </View>
         </View>
-        <View style={styles.progressRow}>
-          <Text style={styles.progressText}>{progress}/{total}</Text>
-          <View style={styles.progressBarBg}>
-            <View style={[styles.progressBarFill, { width: `${(progress / total) * 100}%` }]} />
-          </View>
-        </View>
-        <View style={styles.cardWrapper}>
-          <ImageBackground
-            source={require('../../../assets/images/backCard.png')}
-            style={styles.card}
-            imageStyle={styles.cardImage}
-          >
-            <Text style={styles.word}>{word}</Text>
-          </ImageBackground>
-        </View>
+        <FlipCard word={word} translation={translation} />
         <View style={styles.buttonsRow}>
           <TouchableOpacity style={styles.btnDark}>
             <Text style={styles.btnDarkText}>НАЗАД</Text>
@@ -118,29 +112,6 @@ const styles = StyleSheet.create({
     height: 8,
     backgroundColor: '#4CD964',
     borderRadius: 8,
-  },
-  cardWrapper: {
-    width: '100%',
-    alignItems: 'center',
-    marginVertical: 24,
-  },
-  card: {
-    width: 300,
-    height: 400,
-    borderRadius: 32,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  cardImage: {
-    borderRadius: 32,
-    resizeMode: 'cover',
-  },
-  word: {
-    color: '#fff',
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   buttonsRow: {
     flexDirection: 'row',

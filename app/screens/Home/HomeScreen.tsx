@@ -1,15 +1,34 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import CategoryCard from '../../components/CategoryCard';
 import Header from '../../components/Header';
 import ProgressCard from '../../components/ProgressCard';
 import ReviewCard from '../../components/ReviewCard';
 
 const HomeScreen = () => {
+  const navigation = useNavigation<any>();
+  
+  const progressData = [
+    { title: "Существительные", progress: 0.8 },
+    { title: "Глаголы", progress: 0.2 },
+    { title: "Прилагательные", progress: 0.2 },
+  ];
+
+  const learnMoreData = [
+    { title: 'Существительные', level: 'A1', image: require('../../../assets/images/nounA1.png') },
+    { title: 'Глаголы', level: 'A1', image: require('../../../assets/images/nounA1.png') },
+    { title: 'Прилагательные', level: 'A1', image: require('../../../assets/images/nounA1.png') },
+    { title: 'Наречия', level: 'A1', image: require('../../../assets/images/nounA1.png') },
+    { title: 'Местоимения', level: 'A1', image: require('../../../assets/images/nounA1.png') },
+  ];
+  
   return (
     <View style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Header />
-        <ReviewCard />
+        <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('RepeatWord')}>
+          <ReviewCard />
+        </TouchableOpacity>
 
         <Text style={styles.sectionTitle}>Ты учишь сейчас</Text>
         <FlatList
@@ -20,7 +39,9 @@ const HomeScreen = () => {
             { title: 'Прилагательные', level: 'A1', image: require('../../../assets/images/nounA1.png') },
           ]}
           renderItem={({ item }) => (
-            <CategoryCard title={item.title} level={item.level} image={item.image} />
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Learn', { partOfSpeech: item.title, level: item.level })}>
+              <CategoryCard title={item.title} level={item.level} image={item.image} />
+            </TouchableOpacity>
           )}
           keyExtractor={(_, index) => index.toString()}
           contentContainerStyle={styles.flatListContent}
@@ -28,17 +49,32 @@ const HomeScreen = () => {
         />
 
         <Text style={[styles.sectionTitle, styles.progressTitle]}>Прогресс</Text>
-        <ScrollView horizontal contentContainerStyle={styles.progressScroll} showsHorizontalScrollIndicator={false}>
-          <ProgressCard title="Существительные" progress={0.8} />
-          <ProgressCard title="Глаголы" progress={0.2} />
-          <ProgressCard title="Прилагательные" progress={0.2} />
-        </ScrollView>
+        <FlatList
+          horizontal
+          data={progressData}
+          renderItem={({ item }) => (
+            <TouchableOpacity activeOpacity={0.8}>
+              <ProgressCard title={item.title} progress={item.progress} />
+            </TouchableOpacity>
+          )}
+          keyExtractor={(_, index) => index.toString()}
+          contentContainerStyle={styles.progressScroll}
+          showsHorizontalScrollIndicator={false}
+        />
 
         <Text style={[styles.sectionTitle, styles.learnMoreTitle]}>Учить дальше</Text>
-        <ScrollView horizontal contentContainerStyle={styles.learnMoreScroll} showsHorizontalScrollIndicator={false}>
-          {/* Можно переиспользовать CategoryCard */}
-          <CategoryCard title="gasdf" level="A1" image={require('../../../assets/images/nounA1.png')} />
-        </ScrollView>
+        <FlatList
+          horizontal
+          data={learnMoreData}
+          renderItem={({ item }) => (
+            <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('Learn', { partOfSpeech: item.title, level: item.level })}>
+              <CategoryCard title={item.title} level={item.level} image={item.image} />
+            </TouchableOpacity>
+          )}
+          keyExtractor={(_, index) => index.toString()}
+          contentContainerStyle={styles.learnMoreScroll}
+          showsHorizontalScrollIndicator={false}
+        />
       </ScrollView>
     </View>
   );

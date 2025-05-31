@@ -11,9 +11,9 @@ const HomeStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="HomeMain" component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="RepeatWord" component={RepeatWordScreen} />
-      <Stack.Screen name="Learn" component={LearnScreen} />
-      <Stack.Screen name="LearnNext" component={LearnNextScreen} />
+      <Stack.Screen name="RepeatWord" component={RepeatWordScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Learn" component={LearnScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="LearnNext" component={LearnNextScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
