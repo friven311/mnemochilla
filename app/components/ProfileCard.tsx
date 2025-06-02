@@ -3,7 +3,14 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import BulgedCard from './BulgedCard';
 
 const ProfileCard = ({ name = 'Anna Asty', level = 'A1', wordsCount = 289, rating = 2 }) => (
-  <BulgedCard style={styles.container} height={280}>
+  <BulgedCard 
+    style={styles.container} 
+    contentStyle={styles.contentLayout}
+    width={338}
+    height={280}
+    paddingHorizontal={20}
+    paddingVertical={20}
+  >
     <View style={styles.avatarWrapper}>
       <View style={styles.bgCircle1} />
       <View style={styles.bgCircle2} />
@@ -13,16 +20,16 @@ const ProfileCard = ({ name = 'Anna Asty', level = 'A1', wordsCount = 289, ratin
     <Text style={styles.name}>{name}</Text>
     <View style={styles.statsRow}>
       <View style={styles.statBlock}>
-        <Text style={styles.statLabel}>Уровень</Text>
         <Text style={styles.statValue}>{level}</Text>
+        <Text style={styles.statLabel}>Уровень</Text>
       </View>
       <View style={styles.statBlock}>
-        <Text style={styles.statLabel}>Количество{'\n'}Выученных Слов</Text>
         <Text style={styles.statValue}>{wordsCount}</Text>
+        <Text style={styles.statLabel}>Количество{'\n'}Выученных Слов</Text>
       </View>
       <View style={styles.statBlock}>
-        <Text style={styles.statLabel}>Рейтинг</Text>
         <Text style={styles.statValue}>{rating}</Text>
+        <Text style={styles.statLabel}>Рейтинг</Text>
       </View>
     </View>
   </BulgedCard>
@@ -30,80 +37,83 @@ const ProfileCard = ({ name = 'Anna Asty', level = 'A1', wordsCount = 289, ratin
 
 const styles = StyleSheet.create({
   container: {
+  },
+  contentLayout: {
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    height: 280,
-    backgroundColor: '#261863',
   },
   avatarWrapper: {
-    position: 'relative',
-    alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+    alignItems: 'center',
+    position: 'relative',
   },
   bgCircle1: {
     position: 'absolute',
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    top: -10,
-    left: -10,
+    backgroundColor: '#FFFFFF',
+    opacity: 0.04,
+    top: -30,
+ 
   },
   bgCircle2: {
     position: 'absolute',
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    top: 0,
-    left: 0,
+    backgroundColor: '#FFFFFF',
+    opacity: 0.04,
+    top: -20,
+
   },
   bgCircle3: {
     position: 'absolute',
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    top: 10,
-    left: 10,
+    backgroundColor: '#FFFFFF',
+    opacity: 0.04,
+    top: -10,
+
   },
   avatar: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
     resizeMode: 'contain',
     zIndex: 10,
+    
   },
   name: {
     color: '#fff',
-    fontSize: 37,
+    fontSize: 27,
     fontWeight: '700',
-    marginBottom: 20,
+
     textAlign: 'center',
   },
   statsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    marginTop: 8,
   },
   statBlock: {
     alignItems: 'center',
     flex: 1,
   },
-  statLabel: {
+  statValue: {
     color: '#fff',
-    fontSize: 37,
+    fontSize: 27,
+    fontWeight: '700',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  statLabel: {
+    color: '#FF9EE2',
+    fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
-    marginBottom: 8,
-  },
-  statValue: {
-    color: '#FF9EE2',
-    fontSize: 16,
-    fontWeight: '600',
+    opacity: 0.8,
   },
 });
 

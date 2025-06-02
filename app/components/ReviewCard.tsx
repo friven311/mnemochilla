@@ -2,7 +2,12 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import BulgedCard from './BulgedCard';
 
 const ReviewCard = () => (
-    <BulgedCard style={styles.container}>
+    <BulgedCard 
+        style={styles.container}
+        contentStyle={styles.contentLayout}
+        paddingHorizontal={20}
+        paddingVertical={16}
+    >
         {/* Левая часть: текст */}
         <View style={styles.textBlock}>
             <Text style={styles.wordsCount}>15 Слов</Text>
@@ -20,8 +25,12 @@ const ReviewCard = () => (
 
 const styles = StyleSheet.create({
     container: {
-        padding: 0,
         margin: 16,
+    },
+    contentLayout: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     iconWrapper: {
         width: 80,
@@ -29,7 +38,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        marginLeft: 16,
     },
     bgCircle1: {
         position: 'absolute',
